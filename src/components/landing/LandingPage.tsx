@@ -375,7 +375,181 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── SECTION 3: LIVE INTERACTIVE METABOLIC CALIBRATOR ── */}
+      {/* ── SECTION 3: METABOLIC CALCULATION ENGINE ── */}
+      <section id="engine" className="py-20 bg-gradient-to-b from-[#FAF8F5] via-[#FFFDF9] to-[#F7F5F0] border-b border-[#ECE7DC]">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <ClayBadge variant="tangerine" size="sm">
+              Clinical Formulation
+            </ClayBadge>
+            <h2 className="font-nunito font-black text-3xl sm:text-4xl text-[#1E1B26] mt-3">
+              The Dynamic Mifflin-St Jeor Engine.
+            </h2>
+            <p className="font-dmsans text-sm sm:text-base text-[#645F73] mt-2">
+              Clinically validated metabolic modeling that automatically turns raw body metrics into precise daily caloric targets and macronutrient budgets.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-10">
+            {/* Box 1: BMR Equation Breakdown (7 cols) */}
+            <div className="lg:col-span-7 flex flex-col justify-between">
+              <ClayCard
+                variant="hero"
+                className="!p-6 sm:!p-8 bg-white border border-[#EAE6DD] shadow-clayCard h-full flex flex-col justify-between gap-6"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="h-11 w-11 rounded-[18px] bg-gradient-to-br from-[#FFB347] to-[#FF8A00] flex items-center justify-center text-white shadow-[0_4px_14px_rgba(255,138,0,0.35)] shrink-0">
+                        <Cpu className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-nunito font-black text-xl text-[#1E1B26]">
+                          Mifflin-St Jeor BMR Equation
+                        </h3>
+                        <span className="font-nunito text-xs font-semibold text-[#8C8799]">
+                          Basal Metabolic Rate clinical standard
+                        </span>
+                      </div>
+                    </div>
+                    <ClayBadge variant="coral" size="sm">
+                      ISO Validated
+                    </ClayBadge>
+                  </div>
+
+                  {/* Formula Display Well */}
+                  <div className="p-4 sm:p-5 rounded-[22px] bg-[#FAF8F5] border border-[#E8E2D8] shadow-clayPressedSm mb-4">
+                    <span className="font-nunito text-[11px] font-bold uppercase tracking-wider text-[#645F73] block mb-2">
+                      Mathematical Structure:
+                    </span>
+                    <div className="font-mono text-xs sm:text-sm font-black text-[#1E1B26] bg-white p-3 rounded-[16px] border border-[#E2DDD2] shadow-sm leading-relaxed overflow-x-auto">
+                      BMR = (10 × weight_kg) + (6.25 × height_cm) - (5 × age) + s
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-3 text-xs font-nunito font-extrabold">
+                      <div className="p-2.5 rounded-[14px] bg-[#FFF5F2] border border-[#FF5A36]/20 text-[#FF5A36] flex items-center justify-between">
+                        <span>Biological Men:</span>
+                        <span className="font-mono">s = +5</span>
+                      </div>
+                      <div className="p-2.5 rounded-[14px] bg-[#F5F9FF] border border-[#2563EB]/20 text-[#2563EB] flex items-center justify-between">
+                        <span>Biological Women:</span>
+                        <span className="font-mono">s = -161</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="font-dmsans text-xs text-[#645F73] leading-relaxed">
+                    Unlike outdated Harris-Benedict formulas that overestimate energy requirements by 5–15%, Mifflin-St Jeor accounts for modern skeletal body composition, providing tighter accuracy for natural bodybuilders and athletes.
+                  </p>
+                </div>
+
+                {/* Energy balance formula */}
+                <div className="p-3.5 rounded-[18px] bg-gradient-to-r from-[#FFF6F2] to-[#FFF9F6] border border-[#FF5A36]/20 text-xs font-nunito text-[#1E1B26] flex items-center justify-between">
+                  <span className="font-extrabold flex items-center gap-1.5">
+                    <Flame className="h-4 w-4 text-[#FF5A36]" /> Daily Remaining Budget:
+                  </span>
+                  <span className="font-mono font-black text-[#FF5A36]">
+                    Budget = Target - Logged + Exercise
+                  </span>
+                </div>
+              </ClayCard>
+            </div>
+
+            {/* Box 2: TDEE Activity Multipliers (5 cols) */}
+            <div className="lg:col-span-5 flex flex-col justify-between">
+              <ClayCard
+                variant="floating"
+                className="!p-6 sm:!p-7 bg-white border border-[#EAE6DD] h-full flex flex-col justify-between gap-4"
+              >
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="h-10 w-10 rounded-[16px] bg-gradient-to-br from-[#38BDF8] to-[#0284C7] flex items-center justify-center text-white shadow-sm shrink-0">
+                      <Activity className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-nunito font-black text-lg text-[#1E1B26]">
+                        TDEE Activity Factors
+                      </h3>
+                      <span className="font-nunito text-xs font-semibold text-[#8C8799]">
+                        Total Daily Energy Expenditure
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    {[
+                      { level: 'Sedentary', factor: '1.20×', desc: 'Little to no exercise, desk work' },
+                      { level: 'Light Active', factor: '1.375×', desc: '1–3 training days per week' },
+                      { level: 'Moderate', factor: '1.55×', desc: '3–5 moderate workouts/week' },
+                      { level: 'Very Active', factor: '1.725×', desc: '6–7 intense training sessions' },
+                      { level: 'Athlete Extreme', factor: '1.90×', desc: 'Hard physical labor & double-days' },
+                    ].map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="p-2.5 rounded-[16px] bg-[#FAF8F5] border border-[#ECE7DC] flex items-center justify-between text-xs font-nunito"
+                      >
+                        <div>
+                          <span className="font-black text-[#1E1B26] block">{item.level}</span>
+                          <span className="text-[10px] text-[#8C8799] font-medium">{item.desc}</span>
+                        </div>
+                        <span className="font-mono font-black text-xs text-[#0284C7] bg-[#0284C7]/10 px-2 py-0.5 rounded-full shrink-0">
+                          {item.factor}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-2 text-center">
+                  <span className="text-[11px] font-nunito font-bold text-[#8C8799]">
+                    TDEE = BMR × Activity Factor
+                  </span>
+                </div>
+              </ClayCard>
+            </div>
+          </div>
+
+          {/* 3 Pillars of Goal Adaptation */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <ClayCard variant="flat" className="!p-5 bg-white border border-[#EAE6DD]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="h-3 w-3 rounded-full bg-[#FF5A36]" />
+                <h4 className="font-nunito font-black text-base text-[#1E1B26]">
+                  Fat Loss Cut (-500 kcal)
+                </h4>
+              </div>
+              <p className="font-dmsans text-xs text-[#645F73] leading-relaxed">
+                Applies a calculated 500 kcal daily deficit targeting ~0.45 kg weekly adipose loss while maintaining nitrogen balance with 40% protein.
+              </p>
+            </ClayCard>
+
+            <ClayCard variant="flat" className="!p-5 bg-white border border-[#EAE6DD]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="h-3 w-3 rounded-full bg-[#2563EB]" />
+                <h4 className="font-nunito font-black text-base text-[#1E1B26]">
+                  Metabolic Maintenance (0 kcal)
+                </h4>
+              </div>
+              <p className="font-dmsans text-xs text-[#645F73] leading-relaxed">
+                Preserves exact homeostatic equilibrium at TDEE with balanced 30% Protein, 40% Carbs, and 30% Fats for sustained cognitive energy.
+              </p>
+            </ClayCard>
+
+            <ClayCard variant="flat" className="!p-5 bg-white border border-[#EAE6DD]">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="h-3 w-3 rounded-full bg-[#10B981]" />
+                <h4 className="font-nunito font-black text-base text-[#1E1B26]">
+                  Hypertrophy Bulk (+300 kcal)
+                </h4>
+              </div>
+              <p className="font-dmsans text-xs text-[#645F73] leading-relaxed">
+                Provides a controlled 300 kcal surplus to maximize muscle protein synthesis with minimal fat accumulation (~0.25 kg lean growth weekly).
+              </p>
+            </ClayCard>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTION 4: LIVE INTERACTIVE METABOLIC CALIBRATOR ── */}
       <section id="calculator" className="py-20 bg-[#F7F5F0]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-12">

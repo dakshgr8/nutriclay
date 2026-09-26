@@ -3,6 +3,8 @@
 > **High-Fidelity Ceramic Nutrition & Macronutrient Tracking Architecture**  
 > Engineered with tactile digital clay physics, the Mifflin-St Jeor metabolic calculation engine, multi-modal food logging, and real-time kinetic energy budgeting.
 
+**Live Deployment**: [https://nutriclay-ten.vercel.app](https://nutriclay-ten.vercel.app)
+
 ---
 
 ## 🌟 Highlights

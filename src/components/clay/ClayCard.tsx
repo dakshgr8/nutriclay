@@ -38,7 +38,7 @@ export const ClayCard: React.FC<ClayCardProps> = ({
       className={`relative overflow-hidden rounded-[32px] p-6 sm:p-8 text-[#1E1B26] ${bgClass} ${shadowClass} ${liftClass} ${className}`}
       {...props}
     >
-      <div className="relative z-10 flex h-full flex-col">{children}</div>
+      <div className="relative z-10 flex h-full flex-col min-h-0">{children}</div>
     </div>
   );
 };

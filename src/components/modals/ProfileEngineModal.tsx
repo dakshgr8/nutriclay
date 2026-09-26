@@ -83,43 +83,44 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-hidden"
       style={{ overscrollBehavior: 'contain' }}
     >
       {/* Blurred Backdrop */}
       <div
-        className="fixed inset-0 bg-[#1E1B26]/50 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-[#1E1B26]/60 backdrop-blur-md transition-opacity"
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-3xl my-8 z-10">
-        <ClayCard variant="hero" className="!p-6 sm:!p-8 max-h-[90vh] flex flex-col bg-white">
-          {/* Header */}
-          <div className="flex items-center justify-between pb-4 border-b border-[#ECE8DF]">
-            <div className="flex items-center gap-3.5">
-              <div className="h-12 w-12 rounded-[20px] bg-gradient-to-br from-[#FFB347] to-[#FF8A00] flex items-center justify-center text-white shadow-[0_6px_16px_rgba(255,138,0,0.3)]">
-                <Cpu className="h-6 w-6" />
-              </div>
-              <div>
-                <h2 className="font-nunito font-black text-2xl text-[#1E1B26]">
-                  Dynamic Target Engine
-                </h2>
-                <p className="font-nunito text-xs font-semibold text-[#645F73]">
-                  Mifflin-St Jeor BMR & Adaptive TDEE Macro Splitter
-                </p>
-              </div>
+      {/* Main Dialog: Stationary, Centered, Constrained Height */}
+      <div className="relative w-full max-w-3xl h-[88vh] max-h-[720px] z-10 flex flex-col rounded-[32px] bg-white border border-[#EAE6DD] shadow-[0_25px_60px_-15px_rgba(30,27,38,0.25),0_0_0_1px_rgba(255,255,255,0.8)] overflow-hidden">
+        {/* Pinned Header */}
+        <div className="shrink-0 px-6 sm:px-8 pt-5 pb-4 border-b border-[#ECE8DF] bg-white flex items-center justify-between">
+          <div className="flex items-center gap-3.5">
+            <div className="h-12 w-12 rounded-[20px] bg-gradient-to-br from-[#FFB347] to-[#FF8A00] flex items-center justify-center text-white shadow-[0_6px_16px_rgba(255,138,0,0.3)] shrink-0">
+              <Cpu className="h-6 w-6" />
             </div>
-
-            <button
-              onClick={onClose}
-              className="h-10 w-10 rounded-[16px] bg-[#EFECE6] hover:bg-[#E2DDD2] flex items-center justify-center text-[#645F73] hover:text-[#1E1B26] transition-all cursor-pointer active:scale-90"
-            >
-              <X className="h-5 w-5" />
-            </button>
+            <div>
+              <h2 className="font-nunito font-black text-xl sm:text-2xl text-[#1E1B26]">
+                Dynamic Target Engine
+              </h2>
+              <p className="font-nunito text-xs font-semibold text-[#645F73]">
+                Mifflin-St Jeor BMR & Adaptive TDEE Macro Splitter
+              </p>
+            </div>
           </div>
 
-          {/* Form & Computational Flow */}
-          <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto pr-1 py-4 flex flex-col gap-6">
+          <button
+            onClick={onClose}
+            className="h-9 w-9 rounded-[14px] bg-[#EFECE6] hover:bg-[#E2DDD2] flex items-center justify-center text-[#645F73] hover:text-[#1E1B26] transition-all cursor-pointer active:scale-90"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Form & Computational Flow with Pinned Footer */}
+        <form onSubmit={handleSubmit} className="flex-1 min-h-0 flex flex-col overflow-hidden">
+          <div className="flex-1 min-h-0 overflow-y-auto px-6 sm:px-8 py-5 flex flex-col gap-6 overscroll-contain">
             {/* Biometric Parameters */}
             <div>
               <span className="font-nunito text-xs font-bold uppercase tracking-wider text-[#645F73] block mb-3">
@@ -299,17 +300,37 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
                 </div>
               </div>
             </div>
+          </div>
 
-            <ClayButton
-              type="submit"
-              variant="primary"
-              disabled={isSubmitting}
-              className="w-full mt-2"
-            >
-              {isSubmitting ? 'Updating Targets...' : `Save & Recalculate Daily Goals (${liveTargetCalories} kcal)`}
-            </ClayButton>
-          </form>
-        </ClayCard>
+          {/* Pinned Action Footer */}
+          <div className="shrink-0 px-6 sm:px-8 py-4 border-t border-[#ECE8DF] bg-[#FAF8F5]/95 flex items-center justify-between gap-4">
+            <div>
+              <span className="font-nunito text-[11px] font-bold uppercase tracking-wider text-[#645F73] block">
+                Calculated Daily Target
+              </span>
+              <span className="font-nunito font-black text-xl text-[#FF8A00]">
+                {liveTargetCalories.toLocaleString()} <span className="text-xs font-bold text-[#8C8799]">kcal/day</span>
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <ClayButton
+                type="button"
+                variant="ghost"
+                onClick={onClose}
+                className="text-[#645F73] border border-[#E2DDD2]"
+              >
+                Cancel
+              </ClayButton>
+              <ClayButton
+                type="submit"
+                variant="primary"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Updating Targets...' : 'Save & Recalculate Goals'}
+              </ClayButton>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );

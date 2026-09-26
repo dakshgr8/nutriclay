@@ -180,7 +180,7 @@ body {
 /* Scrollbar System - Clean & No Horizontal Scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #DDD8E6 transparent;
+  scrollbar-color: #D5CFBF transparent;
 }
 
 ::-webkit-scrollbar {
@@ -191,11 +191,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D8D2E1;
+  background: #D5CFBF;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #BFB7CC;
+  background: #BFB7A3;
 }
 
 .no-scrollbar::-webkit-scrollbar {

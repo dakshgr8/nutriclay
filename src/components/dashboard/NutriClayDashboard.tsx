@@ -246,56 +246,82 @@ export const NutriClayDashboard: React.FC<NutriClayDashboardProps> = ({
           </div>
 
           {/* Side Column: Hydration & Metabolic Compliance (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col gap-6 justify-between">
+          <div className="lg:col-span-5 flex flex-col gap-5">
             {/* Hydration Station */}
             <HydrationCard
+              className="flex-1"
               consumedWaterMl={summary.consumedWaterMl}
               targetWaterMl={summary.targetWaterMl}
               onAddWater={handleAddWater}
             />
 
             {/* Metabolic Trajectory Pod */}
-            <ClayCard variant="floating" className="!p-6 bg-gradient-to-br from-white via-[#FFF9F5] to-[#FFF4EC] border-l-4 border-l-[#FF8A00]">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-[16px] bg-gradient-to-br from-[#FFB347] to-[#FF8A00] flex items-center justify-center text-white shadow-[0_4px_12px_rgba(255,138,0,0.3)]">
-                    <Flame className="h-5 w-5" />
+            <ClayCard
+              variant="floating"
+              className="flex-1 !p-6 bg-gradient-to-br from-white via-[#FFF9F5] to-[#FFF4EC] border-l-4 border-l-[#FF8A00] flex flex-col justify-between gap-3.5"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-2.5">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-[16px] bg-gradient-to-br from-[#FFB347] to-[#FF8A00] flex items-center justify-center text-white shadow-[0_4px_12px_rgba(255,138,0,0.3)] shrink-0">
+                      <Flame className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-nunito font-black text-base text-[#1E1B26]">
+                        Metabolic Trajectory
+                      </h3>
+                      <span className="font-nunito text-[11px] font-bold text-[#645F73]">
+                        Goal: {profile.goal === 'cut' ? 'Fat Loss (-500 kcal)' : profile.goal === 'bulk' ? 'Hypertrophy (+300 kcal)' : 'Maintenance'}
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-nunito font-black text-base text-[#1E1B26]">
-                      Metabolic Trajectory
-                    </h3>
-                    <span className="font-nunito text-[11px] font-bold text-[#645F73]">
-                      Goal: {profile.goal === 'cut' ? 'Fat Loss (-500 kcal)' : profile.goal === 'bulk' ? 'Hypertrophy (+300 kcal)' : 'Maintenance'}
-                    </span>
-                  </div>
+                  <ClayBadge variant="emerald" size="sm">
+                    Adherence: 96%
+                  </ClayBadge>
                 </div>
-                <ClayBadge variant="emerald" size="sm">
-                  Adherence: 96%
-                </ClayBadge>
+
+                <p className="font-nunito text-xs text-[#645F73] leading-relaxed">
+                  Your current rolling intake maintains a calibrated 500 kcal deficit, projecting ~0.45 kg weekly fat loss while preserving lean skeletal muscle tissue.
+                </p>
               </div>
 
-              <p className="font-nunito text-xs text-[#645F73] leading-relaxed mb-4">
-                Your current rolling intake maintains a 500 kcal deficit, projecting ~0.45 kg weekly fat loss while preserving lean skeletal muscle tissue.
-              </p>
-
-              <div className="grid grid-cols-2 gap-3 text-center">
-                <div className="p-3 rounded-[18px] bg-white border border-[#E8E2D8] shadow-sm">
-                  <span className="font-nunito text-[10px] font-bold text-[#8C8799] uppercase block">
-                    Starting Scale Weight
+              {/* 3-Pillar Milestone Bento */}
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="p-2.5 rounded-[16px] bg-white border border-[#E8E2D8] shadow-sm">
+                  <span className="font-nunito text-[9px] font-bold text-[#8C8799] uppercase block truncate">
+                    Scale Weight
                   </span>
-                  <span className="font-nunito font-black text-lg text-[#1E1B26]">
+                  <span className="font-nunito font-black text-base text-[#1E1B26]">
                     {profile.currentWeightKg} kg
                   </span>
                 </div>
-                <div className="p-3 rounded-[18px] bg-white border border-[#E8E2D8] shadow-sm">
-                  <span className="font-nunito text-[10px] font-bold text-[#8C8799] uppercase block">
-                    Target Milestone
+                <div className="p-2.5 rounded-[16px] bg-white border border-[#E8E2D8] shadow-sm">
+                  <span className="font-nunito text-[9px] font-bold text-[#8C8799] uppercase block truncate">
+                    Milestone
                   </span>
-                  <span className="font-nunito font-black text-lg text-[#FF5A36]">
+                  <span className="font-nunito font-black text-base text-[#FF5A36]">
                     {profile.targetWeightKg} kg
                   </span>
                 </div>
+                <div className="p-2.5 rounded-[16px] bg-white border border-[#E8E2D8] shadow-sm">
+                  <span className="font-nunito text-[9px] font-bold text-[#8C8799] uppercase block truncate">
+                    Target Pace
+                  </span>
+                  <span className="font-nunito font-black text-base text-[#059669]">
+                    {profile.goal === 'cut' ? '-0.45 kg' : profile.goal === 'bulk' ? '+0.25 kg' : '0.0 kg'}<span className="text-[10px] font-bold text-[#8C8799]">/wk</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Adaptive Status Pill */}
+              <div className="flex items-center justify-between px-3 py-1.5 rounded-[14px] bg-[#FAF8F5] border border-[#ECE7DD] text-[11px] font-nunito font-bold text-[#645F73]">
+                <span className="flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-[#10B981] animate-pulse" />
+                  Adaptive BMR Calibrated
+                </span>
+                <span className="text-[#FF8A00] font-extrabold">
+                  {summary.targetCalories} kcal budget
+                </span>
               </div>
             </ClayCard>
           </div>

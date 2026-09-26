@@ -274,44 +274,45 @@ export const QuickLogModal: React.FC<QuickLogModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-hidden"
       style={{ overscrollBehavior: 'contain' }}
     >
       {/* Dimmer Backdrop */}
       <div
-        className="fixed inset-0 bg-[#1E1B26]/55 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-[#1E1B26]/60 backdrop-blur-md transition-opacity"
         onClick={onClose}
       />
 
-      {/* Main Dialog Container with Balanced Width & Padding */}
-      <div className="relative w-full max-w-2xl my-6 z-10">
-        <ClayCard variant="hero" className="!p-6 sm:!p-7 max-h-[92vh] flex flex-col bg-white">
-          {/* Top Header Row */}
-          <div className="flex items-center justify-between pb-4 border-b border-[#EAE6DD]">
-            <div className="flex items-center gap-3">
-              <div className="h-11 w-11 rounded-[18px] bg-gradient-to-br from-[#FF7E62] to-[#FF5A36] flex items-center justify-center text-white shadow-[0_4px_12px_rgba(255,90,54,0.35)] shrink-0">
-                <UtensilsCrossed className="h-5 w-5" />
-              </div>
-              <div>
-                <h2 className="font-nunito font-black text-xl sm:text-2xl text-[#1E1B26] leading-snug">
-                  Log Food & Nutrients
-                </h2>
-                <p className="font-nunito text-xs font-semibold text-[#645F73]">
-                  Precision ledger with automated macro calculations
-                </p>
-              </div>
+      {/* Main Dialog: Stationary, Centered, Constrained Height */}
+      <div className="relative w-full max-w-2xl h-[88vh] max-h-[720px] z-10 flex flex-col rounded-[32px] bg-white border border-[#EAE6DD] shadow-[0_25px_60px_-15px_rgba(30,27,38,0.25),0_0_0_1px_rgba(255,255,255,0.8)] overflow-hidden">
+        {/* Pinned Top Header */}
+        <div className="shrink-0 px-6 sm:px-7 pt-5 pb-4 border-b border-[#ECE8DF] bg-white flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="h-11 w-11 rounded-[18px] bg-gradient-to-br from-[#FF7E62] to-[#FF5A36] flex items-center justify-center text-white shadow-[0_4px_12px_rgba(255,90,54,0.35)] shrink-0">
+              <UtensilsCrossed className="h-5 w-5" />
             </div>
-
-            <button
-              onClick={onClose}
-              className="h-9 w-9 rounded-[14px] bg-[#EFECE6] hover:bg-[#E2DDD2] flex items-center justify-center text-[#645F73] hover:text-[#1E1B26] transition-all cursor-pointer active:scale-90"
-            >
-              <X className="h-4 w-4" />
-            </button>
+            <div>
+              <h2 className="font-nunito font-black text-xl sm:text-2xl text-[#1E1B26] leading-snug">
+                Log Food & Nutrients
+              </h2>
+              <p className="font-nunito text-xs font-semibold text-[#645F73]">
+                Precision ledger with automated macro calculations
+              </p>
+            </div>
           </div>
 
-          {/* Mode Switcher: 4-Column Balanced Grid (NO Horizontal Scrollbar!) */}
-          <div className="grid grid-cols-4 gap-1.5 p-1 rounded-[18px] bg-[#EFECE6] shadow-clayPressedSm my-4">
+          <button
+            onClick={onClose}
+            className="h-9 w-9 rounded-[14px] bg-[#EFECE6] hover:bg-[#E2DDD2] flex items-center justify-center text-[#645F73] hover:text-[#1E1B26] transition-all cursor-pointer active:scale-90"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Pinned Mode Switcher & Meal Slot Selector */}
+        <div className="shrink-0 px-6 sm:px-7 py-3 border-b border-[#F0ECE3] bg-[#FAF8F5]/90 space-y-2.5">
+          {/* Mode Switcher: 4-Column Balanced Grid */}
+          <div className="grid grid-cols-4 gap-1.5 p-1 rounded-[18px] bg-[#EFECE6] shadow-clayPressedSm">
             {[
               { id: 'search', label: 'Search', icon: <Search className="h-3.5 w-3.5" /> },
               { id: 'quick', label: 'Quick Log', icon: <Zap className="h-3.5 w-3.5" /> },
@@ -322,7 +323,7 @@ export const QuickLogModal: React.FC<QuickLogModalProps> = ({
                 key={tab.id}
                 type="button"
                 onClick={() => setActiveTab(tab.id as TabType)}
-                className={`flex items-center justify-center gap-1.5 py-2 px-1 rounded-[14px] font-nunito font-extrabold text-xs transition-all cursor-pointer select-none ${
+                className={`flex items-center justify-center gap-1.5 py-1.5 px-1 rounded-[14px] font-nunito font-extrabold text-xs transition-all cursor-pointer select-none ${
                   activeTab === tab.id
                     ? 'bg-white text-[#FF5A36] shadow-clayCardSm'
                     : 'text-[#645F73] hover:text-[#1E1B26]'
@@ -334,11 +335,8 @@ export const QuickLogModal: React.FC<QuickLogModalProps> = ({
             ))}
           </div>
 
-          {/* Meal Slot Selector: 5-Pill Equal Grid (Clean Alignment!) */}
-          <div className="mb-4">
-            <span className="font-nunito text-[11px] font-bold uppercase tracking-wider text-[#645F73] block mb-1.5 px-0.5">
-              Select Meal Slot:
-            </span>
+          {/* Meal Slot Selector: 5-Pill Equal Grid */}
+          <div>
             <div className="grid grid-cols-5 gap-1.5 p-1 rounded-[18px] bg-[#EFECE6] shadow-clayPressedSm">
               {MEAL_SLOT_OPTIONS.map((slot) => {
                 const isSelected = mealType === slot.id;
@@ -347,7 +345,7 @@ export const QuickLogModal: React.FC<QuickLogModalProps> = ({
                     key={slot.id}
                     type="button"
                     onClick={() => setMealType(slot.id)}
-                    className={`flex items-center justify-center gap-1 py-2 px-1 rounded-[14px] font-nunito font-extrabold text-xs transition-all cursor-pointer select-none ${
+                    className={`flex items-center justify-center gap-1 py-1.5 px-1 rounded-[14px] font-nunito font-extrabold text-xs transition-all cursor-pointer select-none ${
                       isSelected
                         ? slot.activeColor
                         : 'text-[#645F73] hover:text-[#1E1B26] hover:bg-white/50'
@@ -361,9 +359,10 @@ export const QuickLogModal: React.FC<QuickLogModalProps> = ({
               })}
             </div>
           </div>
+        </div>
 
-          {/* Body Section */}
-          <div className="flex-1 overflow-y-auto pr-1">
+        {/* Scrollable Content Body */}
+        <div className="flex-1 min-h-0 overflow-y-auto px-6 sm:px-7 py-5 overscroll-contain">
             {/* TAB 1: DATABASE SEARCH */}
             {activeTab === 'search' && (
               <div className="flex flex-col gap-4">
@@ -746,8 +745,7 @@ export const QuickLogModal: React.FC<QuickLogModalProps> = ({
               </div>
             )}
           </div>
-        </ClayCard>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };

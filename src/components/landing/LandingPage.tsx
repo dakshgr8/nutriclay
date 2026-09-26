@@ -671,53 +671,6 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ── SECTION 6: BOTTOM CONVERSION CTA ── */}
-      <section className="py-20 bg-white border-t border-[#ECE7DC]">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <ClayCard
-            variant="hero"
-            className="!p-8 sm:!p-14 bg-gradient-to-br from-[#1E1B26] to-[#2B2638] text-white rounded-[40px] text-center shadow-[0_30px_70px_rgba(30,27,38,0.35)] relative overflow-hidden"
-          >
-            {/* Background Accent Glows */}
-            <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#FF5A36]/30 rounded-full blur-[80px] pointer-events-none" />
-            <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-[#FF8A00]/25 rounded-full blur-[80px] pointer-events-none" />
-
-            <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-white text-xs font-nunito font-extrabold backdrop-blur-md">
-                <Sparkles className="h-3.5 w-3.5 text-[#FF7E62]" />
-                Zero Setup • Instant Browser Sandbox
-              </div>
-
-              <h2 className="font-nunito font-black text-3xl sm:text-5xl tracking-tight leading-tight">
-                Take Full Control of Your Metabolic Trajectory Today.
-              </h2>
-
-              <p className="font-dmsans text-sm sm:text-base text-white/80 leading-relaxed max-w-xl mx-auto">
-                No credit cards. No aggressive notifications. Just pure, mathematical nutrition modeling built on high-fidelity digital clay.
-              </p>
-
-              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Link href="/app" className="w-full sm:w-auto">
-                  <ClayButton
-                    size="lg"
-                    variant="primary"
-                    icon={<ArrowRight className="h-5 w-5" />}
-                    className="w-full sm:w-auto shadow-[0_12px_28px_rgba(255,90,54,0.4)]"
-                  >
-                    Open Studio Tracker Now
-                  </ClayButton>
-                </Link>
-                <Link href="/login" className="w-full sm:w-auto">
-                  <button className="w-full sm:w-auto px-6 py-3.5 rounded-[22px] bg-white/10 hover:bg-white/20 text-white font-nunito font-extrabold text-sm border border-white/20 transition-all active:scale-95 cursor-pointer">
-                    Sign In with Demo Account
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </ClayCard>
-        </div>
-      </section>
-
       {/* ── FOOTER ── */}
       <footer className="py-12 bg-[#F7F5F0] border-t border-[#ECE7DC] font-nunito">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-[#8C8799] font-bold">

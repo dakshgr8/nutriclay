@@ -4,10 +4,15 @@ import fs from 'node:fs';
 import { UserProfile, DailyGoal, FoodItem, FoodLog, DailySummary, MealType } from './types';
 import { calculateBMR, calculateTDEE, calculateTargetCalories, calculateMacronutrients } from './calculations';
 
-// Ensure data folder exists
-const dataDir = path.join(process.cwd(), 'data');
+// Ensure data folder exists (uses /tmp on Vercel serverless to avoid EROFS error)
+const isVercel = process.env.VERCEL === '1' || Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME);
+const dataDir = isVercel ? '/tmp/nutriclay-data' : path.join(process.cwd(), 'data');
 if (!fs.existsSync(dataDir)) {
-  fs.mkdirSync(dataDir, { recursive: true });
+  try {
+    fs.mkdirSync(dataDir, { recursive: true });
+  } catch (err) {
+    console.error('Failed to create data dir', err);
+  }
 }
 
 const dbPath = path.join(dataDir, 'nutriclay.db');

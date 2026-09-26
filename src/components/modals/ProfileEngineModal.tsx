@@ -11,7 +11,7 @@ import {
   calculateMacronutrients,
   DIET_MODEL_PRESETS,
 } from '@/lib/calculations';
-import { X, Activity, Flame, ShieldAlert, Cpu } from 'lucide-react';
+import { X, Activity, Cpu } from 'lucide-react';
 
 interface ProfileEngineModalProps {
   isOpen: boolean;
@@ -66,23 +66,23 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
       {/* Blurred Backdrop */}
       <div
-        className="fixed inset-0 bg-[#332F3A]/40 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-[#1E1B26]/50 backdrop-blur-md transition-opacity"
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-3xl my-8 z-10 animate-clay-breathe">
-        <ClayCard variant="hero" className="!p-6 sm:!p-8 max-h-[90vh] flex flex-col">
+      <div className="relative w-full max-w-3xl my-8 z-10">
+        <ClayCard variant="hero" className="!p-6 sm:!p-8 max-h-[90vh] flex flex-col bg-white">
           {/* Header */}
-          <div className="flex items-center justify-between pb-4 border-b border-[#E8E2F2]">
-            <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-[20px] bg-gradient-to-br from-[#38BDF8] to-[#0284C7] flex items-center justify-center text-white shadow-clayButton">
+          <div className="flex items-center justify-between pb-4 border-b border-[#ECE8DF]">
+            <div className="flex items-center gap-3.5">
+              <div className="h-12 w-12 rounded-[20px] bg-gradient-to-br from-[#FFB347] to-[#FF8A00] flex items-center justify-center text-white shadow-[0_6px_16px_rgba(255,138,0,0.3)]">
                 <Cpu className="h-6 w-6" />
               </div>
               <div>
-                <h2 className="font-nunito font-black text-2xl text-[#332F3A]">
+                <h2 className="font-nunito font-black text-2xl text-[#1E1B26]">
                   Dynamic Target Engine
                 </h2>
-                <p className="font-nunito text-xs font-semibold text-[#635F69]">
+                <p className="font-nunito text-xs font-semibold text-[#645F73]">
                   Mifflin-St Jeor BMR & Adaptive TDEE Macro Splitter
                 </p>
               </div>
@@ -90,18 +90,18 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
 
             <button
               onClick={onClose}
-              className="h-10 w-10 rounded-[16px] bg-white shadow-clayCardSm flex items-center justify-center text-[#635F69] hover:text-[#DB2777] transition-all cursor-pointer active:scale-90"
+              className="h-10 w-10 rounded-[16px] bg-[#EFECE6] hover:bg-[#E2DDD2] flex items-center justify-center text-[#645F73] hover:text-[#1E1B26] transition-all cursor-pointer active:scale-90"
             >
               <X className="h-5 w-5" />
             </button>
           </div>
 
-          {/* Form & Live Computational Flow */}
+          {/* Form & Computational Flow */}
           <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto pr-1 py-4 flex flex-col gap-6">
-            {/* Biometric Profile Inputs */}
+            {/* Biometric Parameters */}
             <div>
-              <span className="font-nunito text-xs font-bold uppercase tracking-wider text-[#635F69] block mb-3">
-                Biometric Parameters
+              <span className="font-nunito text-xs font-bold uppercase tracking-wider text-[#645F73] block mb-3">
+                Biometric Intake Parameters
               </span>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
                 <ClaySelect
@@ -141,7 +141,7 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
                   onChange={(e) => setCurrentWeightKg(Number(e.target.value))}
                 />
                 <ClayInput
-                  label="Target Goal Weight"
+                  label="Target Weight"
                   type="number"
                   step="0.1"
                   unit="kg"
@@ -162,7 +162,7 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
 
               <div className="mt-3.5">
                 <ClaySelect
-                  label="Activity Multiplier Factor"
+                  label="Daily Activity Factor Multiplier"
                   value={activityLevel}
                   onChange={(e) => setActivityLevel(Number(e.target.value))}
                   options={[
@@ -178,8 +178,8 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
 
             {/* Diet Model Preset Selector */}
             <div>
-              <span className="font-nunito text-xs font-bold uppercase tracking-wider text-[#635F69] block mb-2">
-                Dietary Macronutrient Model
+              <span className="font-nunito text-xs font-bold uppercase tracking-wider text-[#645F73] block mb-2">
+                Macronutrient Ratio Model
               </span>
               <div className="grid grid-cols-3 gap-2.5">
                 {[
@@ -193,14 +193,14 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
                     onClick={() => setDietModel(model.id as DietModel)}
                     className={`p-3 rounded-[20px] transition-all cursor-pointer select-none text-left ${
                       dietModel === model.id
-                        ? 'bg-gradient-to-br from-[#A78BFA]/20 to-[#7C3AED]/20 border-2 border-[#7C3AED] shadow-clayCardSm'
-                        : 'bg-white hover:bg-[#FAF8FF] border border-[#E5DEEF] shadow-clayCardSm'
+                        ? 'bg-[#FFF5F2] border-2 border-[#FF5A36] shadow-clayCardSm'
+                        : 'bg-[#FAF8F5] hover:bg-white border border-[#E8E2D8] shadow-sm'
                     }`}
                   >
-                    <span className="font-nunito font-extrabold text-xs text-[#332F3A] block">
+                    <span className="font-nunito font-extrabold text-xs text-[#1E1B26] block">
                       {model.label}
                     </span>
-                    <span className="font-nunito text-[11px] font-bold text-[#7C3AED]">
+                    <span className="font-nunito text-[11px] font-black text-[#FF5A36]">
                       {model.split}
                     </span>
                   </button>
@@ -208,71 +208,71 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
               </div>
             </div>
 
-            {/* Live Computational Breakdown Card */}
-            <div className="p-5 rounded-[28px] bg-gradient-to-br from-[#FAF8FF] to-[#ECE7F8] border border-white shadow-clayPressedSm">
+            {/* Live Computational Breakdown */}
+            <div className="p-5 rounded-[28px] bg-gradient-to-br from-[#FAF8F5] to-[#F4EFE6] border border-[#E8E2D8] shadow-clayPressedSm">
               <div className="flex items-center gap-2 mb-3">
-                <Activity className="h-5 w-5 text-[#7C3AED]" />
-                <h4 className="font-nunito font-black text-sm text-[#332F3A] uppercase tracking-wider">
-                  Live Mifflin-St Jeor Engine Flow
+                <Activity className="h-5 w-5 text-[#FF5A36]" />
+                <h4 className="font-nunito font-black text-sm text-[#1E1B26] uppercase tracking-wider">
+                  Live Mifflin-St Jeor Engine Calculations
                 </h4>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
-                <div className="p-3.5 rounded-[20px] bg-white shadow-clayCardSm text-center">
-                  <span className="font-nunito text-[11px] font-bold text-[#635F69] block">
+                <div className="p-3.5 rounded-[20px] bg-white shadow-clayCardSm text-center border border-white">
+                  <span className="font-nunito text-[11px] font-bold text-[#645F73] block">
                     Basal Metabolic (BMR)
                   </span>
-                  <span className="font-nunito font-black text-2xl text-[#332F3A]">
+                  <span className="font-nunito font-black text-2xl text-[#1E1B26]">
                     {liveBMR.toLocaleString()} <span className="text-xs font-bold">kcal</span>
                   </span>
-                  <span className="font-nunito text-[10px] text-[#8E8A96] block mt-0.5">
+                  <span className="font-nunito text-[10px] text-[#8C8799] block mt-0.5">
                     10w + 6.25h - 5a {gender === 'male' ? '+ 5' : '- 161'}
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-[20px] bg-white shadow-clayCardSm text-center">
-                  <span className="font-nunito text-[11px] font-bold text-[#635F69] block">
+                <div className="p-3.5 rounded-[20px] bg-white shadow-clayCardSm text-center border border-white">
+                  <span className="font-nunito text-[11px] font-bold text-[#645F73] block">
                     Total Expenditure (TDEE)
                   </span>
-                  <span className="font-nunito font-black text-2xl text-[#0284C7]">
+                  <span className="font-nunito font-black text-2xl text-[#2563EB]">
                     {liveTDEE.toLocaleString()} <span className="text-xs font-bold">kcal</span>
                   </span>
-                  <span className="font-nunito text-[10px] text-[#8E8A96] block mt-0.5">
-                    BMR × {activityLevel} Activity
+                  <span className="font-nunito text-[10px] text-[#8C8799] block mt-0.5">
+                    BMR × {activityLevel} Multiplier
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-[20px] bg-white shadow-clayCardSm text-center">
-                  <span className="font-nunito text-[11px] font-bold text-[#635F69] block">
-                    Target Daily Intake
+                <div className="p-3.5 rounded-[20px] bg-white shadow-clayCardSm text-center border border-white">
+                  <span className="font-nunito text-[11px] font-bold text-[#645F73] block">
+                    Target Intake Budget
                   </span>
-                  <span className="font-nunito font-black text-2xl text-[#7C3AED]">
+                  <span className="font-nunito font-black text-2xl text-[#FF5A36]">
                     {liveTargetCalories.toLocaleString()} <span className="text-xs font-bold">kcal</span>
                   </span>
-                  <span className="font-nunito text-[10px] text-[#8E8A96] block mt-0.5">
+                  <span className="font-nunito text-[10px] text-[#8C8799] block mt-0.5">
                     {goal === 'cut' ? 'TDEE - 500 kcal' : goal === 'bulk' ? 'TDEE + 300 kcal' : 'TDEE (Maintain)'}
                   </span>
                 </div>
               </div>
 
               {/* Dynamic Macro Allocation */}
-              <div className="p-3.5 rounded-[20px] bg-white shadow-clayCardSm">
-                <span className="font-nunito text-xs font-extrabold text-[#332F3A] block mb-2">
+              <div className="p-4 rounded-[20px] bg-white shadow-clayCardSm border border-white">
+                <span className="font-nunito text-xs font-extrabold text-[#1E1B26] block mb-2">
                   Computed Target Macronutrients ({DIET_MODEL_PRESETS[dietModel].protein}% P /{' '}
                   {DIET_MODEL_PRESETS[dietModel].carbs}% C / {DIET_MODEL_PRESETS[dietModel].fats}% F):
                 </span>
-                <div className="grid grid-cols-3 gap-2 text-center">
-                  <div className="p-2 rounded-xl bg-rose-50 text-rose-800">
-                    <span className="text-[10px] uppercase font-bold block">Protein (4 kcal/g)</span>
-                    <span className="font-black text-lg">{liveMacros.proteinG}g</span>
+                <div className="grid grid-cols-3 gap-2.5 text-center">
+                  <div className="p-2.5 rounded-[16px] bg-[#FFF5F2] border border-[#FF5A36]/20">
+                    <span className="text-[10px] uppercase font-extrabold text-[#FF5A36] block">Protein (4 kcal/g)</span>
+                    <span className="font-nunito font-black text-xl text-[#FF5A36]">{liveMacros.proteinG}g</span>
                   </div>
-                  <div className="p-2 rounded-xl bg-sky-50 text-sky-800">
-                    <span className="text-[10px] uppercase font-bold block">Carbs (4 kcal/g)</span>
-                    <span className="font-black text-lg">{liveMacros.carbsG}g</span>
+                  <div className="p-2.5 rounded-[16px] bg-[#F5F9FF] border border-[#2563EB]/20">
+                    <span className="text-[10px] uppercase font-extrabold text-[#2563EB] block">Carbs (4 kcal/g)</span>
+                    <span className="font-nunito font-black text-xl text-[#2563EB]">{liveMacros.carbsG}g</span>
                   </div>
-                  <div className="p-2 rounded-xl bg-amber-50 text-amber-800">
-                    <span className="text-[10px] uppercase font-bold block">Fats (9 kcal/g)</span>
-                    <span className="font-black text-lg">{liveMacros.fatsG}g</span>
+                  <div className="p-2.5 rounded-[16px] bg-[#FFFDF5] border border-[#F59E0B]/20">
+                    <span className="text-[10px] uppercase font-extrabold text-[#D97706] block">Fats (9 kcal/g)</span>
+                    <span className="font-nunito font-black text-xl text-[#D97706]">{liveMacros.fatsG}g</span>
                   </div>
                 </div>
               </div>

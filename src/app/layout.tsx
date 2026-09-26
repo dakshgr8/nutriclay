@@ -17,8 +17,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "NutriClay — Precision Macro & Nutrition Ledger",
-  description: "High-Fidelity Claymorphism Food Diary, Mifflin-St Jeor Caloric Engine & Macro Splitter",
+  title: "NutriClay — Physical Macro & Calorie Ledger",
+  description: "Bespoke Claymorphic Nutrition Ledger with Mifflin-St Jeor Dynamic Target Engine",
 };
 
 export default function RootLayout({
@@ -28,13 +28,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${nunito.variable} ${dmSans.variable}`}>
-      <body className="relative min-h-screen bg-[#F4F1FA] text-[#332F3A] antialiased selection:bg-[#7C3AED]/20 selection:text-[#7C3AED]">
-        {/* Ambient 3D Clay Background Blobs */}
+      <body className="relative min-h-screen bg-[#F7F5F0] text-[#1E1B26] antialiased selection:bg-[#FF5A36]/15 selection:text-[#FF5A36]">
+        {/* Warm Studio Ambient Light Blobs (No Monotonous Purple!) */}
         <div className="pointer-events-none fixed inset-0 overflow-hidden -z-10" aria-hidden="true">
-          <div className="absolute -top-[12%] -left-[10%] h-[65vh] w-[65vh] rounded-full bg-[#8B5CF6]/15 blur-3xl animate-clay-float" />
-          <div className="absolute top-[30%] -right-[12%] h-[60vh] w-[60vh] rounded-full bg-[#EC4899]/12 blur-3xl animate-clay-float-delayed" />
-          <div className="absolute -bottom-[15%] left-[20%] h-[70vh] w-[70vh] rounded-full bg-[#0EA5E9]/12 blur-3xl animate-clay-float-slow" />
-          <div className="absolute top-[65%] -left-[10%] h-[50vh] w-[50vh] rounded-full bg-[#10B981]/10 blur-3xl animate-clay-float" />
+          {/* Warm Solar Apricot Glow */}
+          <div className="absolute -top-[10%] -left-[10%] h-[60vh] w-[60vh] rounded-full bg-[#FF7A00]/10 blur-[100px] animate-clay-float" />
+          {/* Soft Sage / Fresh Mint Ambient Occlusion */}
+          <div className="absolute top-[25%] -right-[12%] h-[65vh] w-[65vh] rounded-full bg-[#10B981]/8 blur-[110px] animate-clay-float-delayed" />
+          {/* Subdued Mineral Cobalt Wash */}
+          <div className="absolute -bottom-[15%] left-[25%] h-[60vh] w-[60vh] rounded-full bg-[#3B82F6]/7 blur-[120px] animate-clay-float" />
+          {/* Warm Terracotta Horizon */}
+          <div className="absolute top-[70%] -left-[10%] h-[50vh] w-[50vh] rounded-full bg-[#FF5A36]/8 blur-[90px] animate-clay-float-delayed" />
         </div>
 
         {children}

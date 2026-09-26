@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ClayCard } from '../clay/ClayCard';
 import { ClayButton } from '../clay/ClayButton';
 import { ClayProgressBar } from '../clay/ClayProgressBar';
-import { GlassWater, Plus, Check } from 'lucide-react';
+import { GlassWater, Plus, Check, Droplets } from 'lucide-react';
 
 interface HydrationCardProps {
   consumedWaterMl: number;
@@ -32,35 +32,36 @@ export const HydrationCard: React.FC<HydrationCardProps> = ({
   const percent = Math.min(100, Math.round((consumedWaterMl / (targetWaterMl || 1)) * 100));
 
   return (
-    <ClayCard variant="floating" className="!p-6 bg-gradient-to-br from-white/90 to-[#EFF6FF]/70">
+    <ClayCard variant="floating" className="!p-6 bg-gradient-to-br from-white via-[#F7FAFE] to-[#EEF5FC]">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
         <div className="flex items-center gap-3.5">
-          <div className="h-12 w-12 rounded-[20px] bg-gradient-to-br from-[#38BDF8] to-[#0284C7] flex items-center justify-center text-white shadow-clayButton">
+          <div className="h-12 w-12 rounded-[20px] bg-gradient-to-br from-[#38BDF8] to-[#0284C7] flex items-center justify-center text-white shadow-[0_6px_16px_rgba(2,132,199,0.3)]">
             <GlassWater className="h-6 w-6" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="font-nunito font-black text-lg text-[#332F3A]">
-                Hydration Tracker
+              <h3 className="font-nunito font-black text-lg text-[#1E1B26]">
+                Hydration Station
               </h3>
               <span className="font-nunito text-xs font-black text-[#0284C7] bg-[#0284C7]/10 px-2.5 py-0.5 rounded-full">
                 {percent}%
               </span>
             </div>
-            <p className="font-nunito text-xs font-semibold text-[#635F69]">
-              Target: {(targetWaterMl / 1000).toFixed(1)}L Daily
+            <p className="font-nunito text-xs font-semibold text-[#645F73]">
+              Daily Target: {(targetWaterMl / 1000).toFixed(1)} Liters
             </p>
           </div>
         </div>
 
-        {/* Quick Add Buttons */}
-        <div className="flex items-center gap-2.5">
+        {/* Quick Add Pills */}
+        <div className="flex items-center gap-2">
           <ClayButton
             size="sm"
-            variant="sky"
+            variant="secondary"
             disabled={isLogging}
             onClick={() => handleQuickAdd(250)}
-            icon={recentlyAdded === 250 ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+            icon={recentlyAdded === 250 ? <Check className="h-4 w-4 text-[#10B981]" /> : <Droplets className="h-4 w-4 text-[#0284C7]" />}
+            className="border border-[#E2DDD2]"
           >
             +250 ml
           </ClayButton>
@@ -69,7 +70,8 @@ export const HydrationCard: React.FC<HydrationCardProps> = ({
             variant="secondary"
             disabled={isLogging}
             onClick={() => handleQuickAdd(500)}
-            icon={recentlyAdded === 500 ? <Check className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+            icon={recentlyAdded === 500 ? <Check className="h-4 w-4 text-[#10B981]" /> : <Plus className="h-4 w-4 text-[#0284C7]" />}
+            className="border border-[#E2DDD2]"
           >
             +500 ml
           </ClayButton>
@@ -77,19 +79,22 @@ export const HydrationCard: React.FC<HydrationCardProps> = ({
       </div>
 
       <div className="flex items-baseline justify-between mb-2">
-        <div className="font-nunito font-black text-2xl text-[#332F3A]">
+        <div className="font-nunito font-black text-2xl text-[#1E1B26]">
           {consumedWaterMl.toLocaleString()}{' '}
-          <span className="text-xs font-bold text-[#635F69]">ml</span>
+          <span className="text-xs font-bold text-[#8C8799]">ml</span>
         </div>
-        <div className="font-nunito text-xs font-bold text-[#635F69]">
-          Remaining: {Math.max(0, targetWaterMl - consumedWaterMl).toLocaleString()} ml
+        <div className="font-nunito text-xs font-bold text-[#645F73]">
+          Remaining:{' '}
+          <strong className="text-[#1E1B26]">
+            {Math.max(0, targetWaterMl - consumedWaterMl).toLocaleString()} ml
+          </strong>
         </div>
       </div>
 
       <ClayProgressBar
         value={consumedWaterMl}
         max={targetWaterMl}
-        color="blue"
+        color="cobalt"
         height="default"
       />
     </ClayCard>

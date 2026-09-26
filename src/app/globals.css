@@ -177,18 +177,32 @@ body {
   animation: clay-breathe 6s ease-in-out infinite;
 }
 
-/* Custom Scrollbar for tactile containers */
+/* Scrollbar System - Clean & No Horizontal Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #DDD8E6 transparent;
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 0px; /* Completely hide horizontal scrollbars! */
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #DDD8E6;
+  background: #D8D2E1;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C4BDD3;
+  background: #BFB7CC;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

@@ -36,6 +36,25 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
   const [dietModel, setDietModel] = useState<DietModel>('high_protein');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Lock body scroll when modal is open
+  React.useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      const originalPaddingRight = document.body.style.paddingRight;
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      document.body.style.overflow = 'hidden';
+      if (scrollBarWidth > 0) {
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
+      }
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.body.style.paddingRight = originalPaddingRight;
+      };
+    }
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   // Live Mifflin-St Jeor computations
@@ -63,7 +82,10 @@ export const ProfileEngineModal: React.FC<ProfileEngineModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto"
+      style={{ overscrollBehavior: 'contain' }}
+    >
       {/* Blurred Backdrop */}
       <div
         className="fixed inset-0 bg-[#1E1B26]/50 backdrop-blur-md transition-opacity"

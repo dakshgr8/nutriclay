@@ -42,7 +42,7 @@ export const TopBar: React.FC<TopBarProps> = ({
   };
 
   return (
-    <header className="sticky top-4 z-40 w-full mb-8">
+    <header className="relative w-full pt-4 mb-6 z-30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 p-4 sm:p-5 rounded-[36px] bg-white/90 backdrop-blur-2xl border border-white shadow-clayCard">
           {/* Logo & Tagline */}

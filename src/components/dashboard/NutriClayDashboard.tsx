@@ -42,6 +42,20 @@ export const NutriClayDashboard: React.FC<NutriClayDashboardProps> = ({
   const [isLogModalOpen, setIsLogModalOpen] = useState(false);
   const [activeMealSlot, setActiveMealSlot] = useState<MealType>('breakfast');
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Track page scroll to move the indicator bar
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalScroll > 0) {
+        setScrollProgress(Math.min(100, Math.max(0, (window.scrollY / totalScroll) * 100)));
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Fetch summary when date changes
   const loadData = useCallback(async (date: string) => {
@@ -139,7 +153,15 @@ export const NutriClayDashboard: React.FC<NutriClayDashboardProps> = ({
 
   return (
     <div className="min-h-screen pb-24 text-[#1E1B26]">
-      {/* Top Ceramic Navigation Bar */}
+      {/* Real-time Dynamic Scroll Progress Indicator */}
+      <div className="fixed top-0 left-0 right-0 h-1.5 z-50 pointer-events-none bg-transparent">
+        <div
+          className="h-full bg-gradient-to-r from-[#FF7E62] via-[#FF5A36] to-[#FF8A00] transition-all duration-100 ease-out shadow-[0_2px_8px_rgba(255,90,54,0.45)]"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+
+      {/* Top Ceramic Navigation Bar (Moves naturally with page scroll) */}
       <TopBar
         selectedDate={selectedDate}
         onDateChange={handleDateChange}

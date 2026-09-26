@@ -98,6 +98,25 @@ export const QuickLogModal: React.FC<QuickLogModalProps> = ({
     setMealType(initialMealType);
   }, [initialMealType]);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
+      const originalPaddingRight = document.body.style.paddingRight;
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      document.body.style.overflow = 'hidden';
+      if (scrollBarWidth > 0) {
+        document.body.style.paddingRight = `${scrollBarWidth}px`;
+      }
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.body.style.paddingRight = originalPaddingRight;
+      };
+    }
+  }, [isOpen]);
+
   // Initial load & search handler
   useEffect(() => {
     if (!isOpen) return;
@@ -254,7 +273,10 @@ export const QuickLogModal: React.FC<QuickLogModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto"
+      style={{ overscrollBehavior: 'contain' }}
+    >
       {/* Dimmer Backdrop */}
       <div
         className="fixed inset-0 bg-[#1E1B26]/55 backdrop-blur-md transition-opacity"
